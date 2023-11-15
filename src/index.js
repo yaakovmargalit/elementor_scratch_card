@@ -1,6 +1,6 @@
+import './index.css';
+import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js';
 
-
-import './index.css'
 class elementorScratchCard extends elementorModules.frontend.handlers.Base {
   getDefaultSettings() {
     return {
@@ -23,6 +23,22 @@ class elementorScratchCard extends elementorModules.frontend.handlers.Base {
 
   onScratchCardLoad() {
  
+    const sc = new ScratchCard('.elementor-scratch-card', {
+      scratchType: SCRATCH_TYPE.SPRAY,
+      containerWidth: scContainer.offsetWidth,
+      containerHeight: 300,
+      imageForwardSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOPfWbbXlK68w9GtueTUonD2gdaoC_zA3p1WpQvLgnar54qBq2LOneoX9tvHUeu3Ii3Q&usqp=CAU',
+      imageBackgroundSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQUbvWX2EsoBDFuYJjzUVmKzCN0PYvlb4K1qPsNgnvlprMuWfKxQRaYLG0IY_oUCIpesc&usqp=CAU',
+      htmlBackground: '<p class="test"><strong>Hello i am HTML content !</strong></p>',
+      clearZoneRadius: 50,
+      nPoints: 30,
+      pointSize: 4,
+      callback: function () {
+        alert('Now the window will reload !')
+        window.location.reload()
+      }
+    })
+
   }
 }
 

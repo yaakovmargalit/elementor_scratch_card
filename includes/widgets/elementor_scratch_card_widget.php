@@ -133,32 +133,9 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        echo '<div class="swiper-container mySwiper" data-isAutoplay="'. esc_html($settings['is_autoplay']??0).'" data-delay="'. esc_html($settings['delay']).'" data-effect="'. esc_html($settings['effect']).'"><div class="swiper-wrapper">';
-
-        foreach ($settings['cards'] as $card) {
-            echo '<div class="swiper-slide" style="background-image: url(' . esc_url($card['image']['url']) . ');background-size: cover;background-position: center;flex-direction: column;">';
-            echo '<h2 class="card-title" style="color:' . esc_html($card['title_color']) . ';    text-align: center;">' . esc_html($card['title']) . '</h2>';
-            echo '</div>';
-        }
-
-        echo '</div></div>';
+        echo '<div class="elementor-scratch-card">';
+        echo '</div>';
     }
-    protected function _content_template()
-    {
-        ?>
-        <# view.addInlineEditingAttributes('cards', 'repeater' ); #>
-            <div class="swiper-container mySwiper" data-isAutoplay="{{settings.is_autoplay}}" data-delay="{{settings.delay}}" data-effect="{{settings.effect}}">
-                <div class="swiper-wrapper">
-
-                    <# _.each(settings.cards, function(card) { #>
-                        <div class="swiper-slide"
-                            style="background-image: url({{card.image.url}});background-size: cover;background-position: center;flex-direction: column;">
-                            <h2 class="card-title" style="color:{{card.title_color}};text-align: center;">{{card.title}}
-                            </h2>
-                            <# } ); #>
-                        </div>
-                </div>
-                <?php
-    }
+  
 
 }
