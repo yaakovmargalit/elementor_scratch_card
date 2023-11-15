@@ -105,7 +105,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var scratchcard_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(scratchcard_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
-class elementorScratchCard extends elementorModules.frontend.handlers.Base {
+class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
+  onInit() {
+    super.onInit();
+    this.onScratchCardLoad();
+  }
   getDefaultSettings() {
     return {
       selectors: {
@@ -120,29 +124,34 @@ class elementorScratchCard extends elementorModules.frontend.handlers.Base {
     };
   }
   bindEvents() {
-    console.log("dd");
-    this.elements.$scratchCard.ready(this.onScratchCardLoad.bind(this));
+    // this.elements.$scratchCard.ready(this.onScratchCardLoad.bind(this));
   }
   onScratchCardLoad() {
-    const containerHeight = this.elements.$scratchCard.data('containerheight');
-    console.log(containerHeight);
+    const containerHeight = this.getElementSettings('height');
+    const frontImage = this.getElementSettings('front_image');
+    const backImage = this.getElementSettings('back_image');
+    const backHTML = this.getElementSettings('back_html');
+    const percentage = this.getElementSettings('percentage');
+    const scratchStyle = +this.getElementSettings('scratch_style');
+    const pluginUrl = this.getElementSettings('plugin_url');
+    const scratchWidth = this.getElementSettings('scratch_width');
+    const callbackCode = this.getElementSettings('callback_code');
+    var myCodeFunction = new Function(callbackCode);
     const scContainer = document.querySelector('.elementor-scratch-card');
-    console.log(scContainer);
     const sc = new scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.ScratchCard(scContainer, {
-      scratchType: scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.SCRATCH_TYPE.LINE,
+      scratchType: scratchStyle,
       containerWidth: scContainer.offsetWidth,
-      containerHeight,
-      imageForwardSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOPfWbbXlK68w9GtueTUonD2gdaoC_zA3p1WpQvLgnar54qBq2LOneoX9tvHUeu3Ii3Q&usqp=CAU',
-      imageBackgroundSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQUbvWX2EsoBDFuYJjzUVmKzCN0PYvlb4K1qPsNgnvlprMuWfKxQRaYLG0IY_oUCIpesc&usqp=CAU',
-      // htmlBackground: '<p class="elementor-scratch-card-background-html"><strong>Hello i am HTML content !</strong></p>',
-      clearZoneRadius: 40,
+      containerHeight: containerHeight.size,
+      imageForwardSrc: frontImage.url,
+      imageBackgroundSrc: backImage.url,
+      htmlBackground: backHTML,
+      brushSrc: pluginUrl + '/images/brush.png',
+      clearZoneRadius: scratchStyle === 0 ? 0 : scratchWidth.size,
+      width: 5,
       nPoints: 30,
       pointSize: 3,
-      percentToFinish: 100,
-      callback: function () {
-        // alert('Now the window will reload !')
-        // window.location.reload()
-      }
+      percentToFinish: percentage,
+      callback: myCodeFunction
     });
 
     // Init
@@ -157,13 +166,18 @@ class elementorScratchCard extends elementorModules.frontend.handlers.Base {
   }
 }
 jQuery(window).on('elementor/frontend/init', () => {
-  const addHandler = $element => {
-    elementorFrontend.elementsHandler.addHandler(elementorScratchCard, {
-      $element
-    });
-  };
-  elementorFrontend.hooks.addAction('frontend/element_ready/elementor_scratch_card.default', addHandler);
+  elementorFrontend.elementsHandler.attachHandler('elementor_scratch_card', ElementorScratchCard);
 });
+
+// jQuery(window).on('elementor/frontend/init', () => {
+//   const addHandler = ($element) => {
+//     elementorFrontend.elementsHandler.addHandler(elementorScratchCard, {
+//       $element,
+//     });
+//   };
+
+//   elementorFrontend.hooks.addAction('frontend/element_ready/elementor_scratch_card.default', addHandler);
+// });
 })();
 
 /******/ })()
