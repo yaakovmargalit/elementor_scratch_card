@@ -120,23 +120,39 @@ class elementorScratchCard extends elementorModules.frontend.handlers.Base {
     };
   }
   bindEvents() {
+    console.log("dd");
     this.elements.$scratchCard.ready(this.onScratchCardLoad.bind(this));
   }
   onScratchCardLoad() {
-    const sc = new scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.ScratchCard('.elementor-scratch-card', {
-      scratchType: scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.SCRATCH_TYPE.SPRAY,
+    const containerHeight = this.elements.$scratchCard.data('containerheight');
+    console.log(containerHeight);
+    const scContainer = document.querySelector('.elementor-scratch-card');
+    console.log(scContainer);
+    const sc = new scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.ScratchCard(scContainer, {
+      scratchType: scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.SCRATCH_TYPE.LINE,
       containerWidth: scContainer.offsetWidth,
-      containerHeight: 300,
+      containerHeight,
       imageForwardSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOPfWbbXlK68w9GtueTUonD2gdaoC_zA3p1WpQvLgnar54qBq2LOneoX9tvHUeu3Ii3Q&usqp=CAU',
       imageBackgroundSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQUbvWX2EsoBDFuYJjzUVmKzCN0PYvlb4K1qPsNgnvlprMuWfKxQRaYLG0IY_oUCIpesc&usqp=CAU',
-      htmlBackground: '<p class="test"><strong>Hello i am HTML content !</strong></p>',
-      clearZoneRadius: 50,
+      // htmlBackground: '<p class="elementor-scratch-card-background-html"><strong>Hello i am HTML content !</strong></p>',
+      clearZoneRadius: 40,
       nPoints: 30,
-      pointSize: 4,
+      pointSize: 3,
+      percentToFinish: 100,
       callback: function () {
-        alert('Now the window will reload !');
-        window.location.reload();
+        // alert('Now the window will reload !')
+        // window.location.reload()
       }
+    });
+
+    // Init
+    sc.init().then(() => {
+      sc.canvas.addEventListener('scratch.move', () => {
+        let percent = sc.getPercent().toFixed(2);
+      });
+    }).catch(error => {
+      // image not loaded
+      alert(error.message);
     });
   }
 }
@@ -146,7 +162,7 @@ jQuery(window).on('elementor/frontend/init', () => {
       $element
     });
   };
-  elementorFrontend.hooks.addAction('frontend/element_ready/ym_carrousel.default', addHandler);
+  elementorFrontend.hooks.addAction('frontend/element_ready/elementor_scratch_card.default', addHandler);
 });
 })();
 

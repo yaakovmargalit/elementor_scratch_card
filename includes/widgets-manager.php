@@ -15,11 +15,11 @@ add_action( 'elementor/widgets/register', 'register_elementor_scratch_card_custo
 function elementor_scratch_card_widgets_dependencies() {
 
 	/* Scripts */
-	wp_register_script( 'elementor_scratch_card-script-1', plugins_url( '/js/index.js', __FILE__ ), array( 'elementor-frontend'), '2.0.3', true );
+	wp_register_script( 'elementor_scratch_card-script-1', plugins_url( '/js/index.js', __FILE__ ), array( 'elementor-frontend'), null, true );
 
 
 	/* Styles */
-	wp_register_style( 'widget-style-1', plugins_url( '/js/index.css', __FILE__ ) );
+	wp_register_style( 'widget-style-1', plugins_url( '/js/index.css', __FILE__ ),[],'1.0.4' );
 	
 
 }

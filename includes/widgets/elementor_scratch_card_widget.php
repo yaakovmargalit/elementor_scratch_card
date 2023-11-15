@@ -65,7 +65,25 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
      
-  
+        $this->add_control(
+			'important_note',
+			[
+				'label' => esc_html__( 'שימו ❤️', 'elementor_scratch_card' ),
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => esc_html__( ' אם יוגדר קוד HTML התוכן שלו יופיע ברקע הכרטיס במקום התמונה', 'textdomain' ),
+				'content_classes' => 'your-class',
+			]
+		);
+
+        $this->add_control(
+			'custom_html',
+			[
+				'label' => esc_html__( 'Custom HTML', 'elementor_scratch_card' ),
+				'type' => \Elementor\Controls_Manager::CODE,
+				'language' => 'html',
+				'rows' => 20,
+			]
+		);
 
       
 
@@ -92,7 +110,8 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                     'size' => 300,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .mySwiper' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .sc__wrapper' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .sc__container' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -118,7 +137,8 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                     'size' => 300,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .mySwiper' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .sc__wrapper' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .sc__container' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -132,8 +152,9 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-
-        echo '<div class="elementor-scratch-card">';
+        echo '<div class="sc__wrapper">';
+        echo '<div data-containerHeight="'.esc_html($settings['height']["size"]).'" class="elementor-scratch-card sc__container">';
+        echo '</div>';
         echo '</div>';
     }
   

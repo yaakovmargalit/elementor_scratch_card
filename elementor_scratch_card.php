@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: ערטיס גירוד לאלמנטור
+ * Plugin Name: כרטיס גירוד לאלמנטור
  * Description: צור כרטיס גירוד באתר שלך
  * Text Domain: elementor_scratch_card
  * 
@@ -19,7 +19,7 @@
 
 
 
-function ym_carrousel() {
+function elementor_scratch_card() {
 
 	// Load plugin file
 	require_once( __DIR__ . '/includes/widgets-manager.php' );

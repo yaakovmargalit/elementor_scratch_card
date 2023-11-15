@@ -1,4 +1,50 @@
 /*!*******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/index.css ***!
   \*******************************************************************************************************************************************************************/
+.sc__inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ }
+ .sc__wrapper {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    border: 5px solid white;
+ }
+ 
+ .sc__container {
+    position: relative;
+    overflow: hidden;
+    /* height: 300px;
+    max-width: 300px; */
+ }
+ 
+ .sc__container > img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ }
+ 
+ .sc__container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ }
 
+ .elementor-scratch-card-background-html{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+ }
+ 
+
+/*# sourceMappingURL=index.css.map*/
