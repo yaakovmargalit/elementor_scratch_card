@@ -57,14 +57,14 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-			'plugin_url',
-			[
-				'label' => esc_html__( 'View', 'textdomain' ),
-				'type' => \Elementor\Controls_Manager::HIDDEN,
-				'default' => plugin_dir_url(__FILE__),
+            'plugin_url',
+            [
+                'label' => esc_html__('View', 'textdomain'),
+                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'default' => plugin_dir_url(__FILE__),
                 'frontend_available' => true,
-			]
-		);
+            ]
+        );
 
         $this->add_control(
             'percentage',
@@ -80,17 +80,17 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-			'show_confetti',
-			[
-				'label' => esc_html__( 'הצג קונפטי בסיום', 'elementor_scratch_card' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'כן', 'elementor_scratch_card' ),
-				'label_off' => esc_html__( 'לא', 'elementor_scratch_card' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
+            'show_confetti',
+            [
+                'label' => esc_html__('הצג קונפטי בסיום', 'elementor_scratch_card'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('כן', 'elementor_scratch_card'),
+                'label_off' => esc_html__('לא', 'elementor_scratch_card'),
+                'return_value' => 'yes',
+                'default' => 'yes',
                 'frontend_available' => true,
-			]
-		);
+            ]
+        );
 
         $this->add_control(
             'confetti_style',
@@ -103,31 +103,44 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                     'starts' => esc_html__('כוכבים זהב', 'elementor_scratch_card'),
                     'gold' => esc_html__('נייר זהב', 'elementor_scratch_card'),
                     'distillation' => esc_html__('זיקוקים', 'elementor_scratch_card'),
-                  
+                    'custom' => esc_html__('מותאם אישית', 'elementor_scratch_card')
                 ]
 
             ]
         );
+        $this->add_control(
+			'confetti_custom_img',
+			[
+				'label' => esc_html__( 'העלה gif עם רקע שקוף', 'elementor_scratch_card' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+                'condition' => [
+                    'confetti_style' => 'custom',
+                ],
+			]
+		);
 
         $this->add_control(
-			'confetti_duration',
-			[
-				'label' => esc_html__( 'זמן הצגת הקונפטי (בשניות)', 'elementor_scratch_card' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+            'confetti_duration',
+            [
+                'label' => esc_html__('זמן הצגת הקונפטי (בשניות)', 'elementor_scratch_card'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
                 // 'default' => 1,
-				'range' =>  [
-						'min' => 1,
-						'max' => 100,
-                        'step' => 1,
-                        
-					],
-				'default' => [
-					'size' => 2,
+                'range' => [
+                    'min' => 1,
+                    'max' => 100,
+                    'step' => 1,
+
+                ],
+                'default' => [
+                    'size' => 2,
                 ],
                 'frontend_available' => true
 
-			]
-		);
+            ]
+        );
 
         $this->add_control(
             'front_image',
@@ -216,25 +229,25 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
-			'scratch_width',
-			[
-				'label' => esc_html__( 'עובי מברשת', 'elementor_scratch_card' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+            'scratch_width',
+            [
+                'label' => esc_html__('עובי מברשת', 'elementor_scratch_card'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
                 'default' => 30,
-				'range' =>  [
-						'min' => 1,
-						'max' => 100,
-					],
-				'default' => [
-					'size' => 30,
+                'range' => [
+                    'min' => 1,
+                    'max' => 100,
+                ],
+                'default' => [
+                    'size' => 30,
                 ],
                 'frontend_available' => true,
                 'condition' => [
-                    'scratch_style' => [1,2,3],
+                    'scratch_style' => ['1', '2', '3'],
                 ],
 
-			]
-		);
+            ]
+        );
         $this->end_controls_section();
 
 
@@ -247,12 +260,12 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_group_control(
-			\Elementor\Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'box_shadow',
-				'selector' => '{{WRAPPER}} .sc__container',
-			]
-		);
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'box_shadow',
+                'selector' => '{{WRAPPER}} .sc__container',
+            ]
+        );
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -369,10 +382,10 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 ],
             ]
         );
-     
-     
 
-     
+
+
+
 
         $this->end_controls_tab();
 
@@ -382,7 +395,12 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $t = time();
+        $gif_url = '';
+        if ($settings['confetti_style'] == 'custom') {
+            $gif_url = $settings['confetti_custom_img']['url'];
+        } else {
+            $gif_url = plugin_dir_url(__FILE__) . '/images/' . esc_html($settings['confetti_style']) . '.gif';
+        }
         // echo '<div class="sc__wrapper">';
         echo '<div class="elementor-scratch-card sc__container">';
         echo '<div id="elementor-scratch-card-confetti-box" style="
@@ -394,7 +412,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         z-index:1;
         display: none;
     ">';
-        echo '<img class="elementor-scratch-card-confetti" style="height: 100%; width: 100%;" src="'.esc_html( plugin_dir_url(__FILE__).'/images/'.esc_html( $settings['confetti_style'] ).'.gif' ).'" />';
+        echo '<img class="elementor-scratch-card-confetti" style="height: 100%; width: 100%;" src="' . esc_html($gif_url) . '" />';
         echo '</div>';
         echo '</div>';
         // echo '</div>';

@@ -62,7 +62,6 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
     })
 
     function callbackFunction() {
-      console.log(showConfetti);
       if (showConfetti==="yes") {
         jQuery('#elementor-scratch-card-confetti-box').fadeIn()
         setTimeout(() => {
@@ -79,7 +78,7 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
       })
     }).catch((error) => {
       // image not loaded
-      alert(error.message);
+      console.error(error.message);
     });
 
   }
