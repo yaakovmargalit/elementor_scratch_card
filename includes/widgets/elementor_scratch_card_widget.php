@@ -99,8 +99,10 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'confetti',
                 'options' => [
-                    'confetti' => esc_html__('קונפטי ציבעוני', 'elementor_scratch_card'),
+                    'confetti' => esc_html__('נייר ציבעוני', 'elementor_scratch_card'),
                     'starts' => esc_html__('כוכבים זהב', 'elementor_scratch_card'),
+                    'gold' => esc_html__('נייר זהב', 'elementor_scratch_card'),
+                    'distillation' => esc_html__('זיקוקים', 'elementor_scratch_card'),
                   
                 ]
 
@@ -243,16 +245,14 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-        $this->add_control(
-            'custom_box_shadow',
-            [
-                'label' => esc_html__('הצללה', 'elementor_scratch_card'),
-                'type' => \Elementor\Controls_Manager::BOX_SHADOW,
-                'selectors' => [
-                    '{{SELECTOR}} .sc__container' => 'box-shadow: {{HORIZONTAL}}px {{VERTICAL}}px {{BLUR}}px {{SPREAD}}px {{COLOR}};',
-                ],
-            ]
-        );
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'box_shadow',
+				'selector' => '{{WRAPPER}} .sc__container',
+			]
+		);
         $this->end_controls_section();
 
         $this->start_controls_section(
