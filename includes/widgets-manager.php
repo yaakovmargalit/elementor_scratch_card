@@ -19,7 +19,7 @@ function elementor_scratch_card_widgets_dependencies() {
 
 
 	/* Styles */
-	wp_register_style( 'widget-style-1', plugins_url( '/js/index.css', __FILE__ ),[],'1.0.4' );
+	wp_register_style( 'widget-style-1', plugins_url( '/js/index.css', __FILE__ ),[],null );
 	
 
 }

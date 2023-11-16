@@ -73,7 +73,10 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
   }
 }
 
-
+// jQuery('#elementor-scratch-card-confetti-box').css('display','block')
+// setTimeout(()=>{
+//   jQuery('#elementor-scratch-card-confetti-box').css('display','none')
+// },1500)
 
 jQuery(window).on('elementor/frontend/init', () => {
   elementorFrontend.elementsHandler.attachHandler('elementor_scratch_card', ElementorScratchCard);

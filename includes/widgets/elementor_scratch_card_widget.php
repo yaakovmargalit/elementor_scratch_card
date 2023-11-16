@@ -326,12 +326,14 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         $t = time();
         // echo '<div class="sc__wrapper">';
         echo '<div class="elementor-scratch-card sc__container">';
-        echo '<div style="
+        echo '<div id="elementor-scratch-card-confetti-box" style="
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        z-index:1;
+        display: none;
     ">';
         echo '<img class="elementor-scratch-card-confetti" src="'.esc_html( plugin_dir_url(__FILE__).'/images/confetti.gif' ).'" />';
         echo '</div>';
