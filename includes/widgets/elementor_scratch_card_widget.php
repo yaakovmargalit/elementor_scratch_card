@@ -93,6 +93,41 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
 		);
 
         $this->add_control(
+            'confetti_style',
+            [
+                'label' => esc_html__('סגנון קונפטי', 'elementor_scratch_card'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'confetti',
+                'options' => [
+                    'confetti' => esc_html__('קונפטי ציבעוני', 'elementor_scratch_card'),
+                    'starts' => esc_html__('כוכבים זהב', 'elementor_scratch_card'),
+                  
+                ]
+
+            ]
+        );
+
+        $this->add_control(
+			'confetti_duration',
+			[
+				'label' => esc_html__( 'זמן הצגת הקונפטי (בשניות)', 'elementor_scratch_card' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+                // 'default' => 1,
+				'range' =>  [
+						'min' => 1,
+						'max' => 100,
+                        'step' => 1,
+                        
+					],
+				'default' => [
+					'size' => 2,
+                ],
+                'frontend_available' => true
+
+			]
+		);
+
+        $this->add_control(
             'front_image',
             [
                 'label' => esc_html__('תמונה קדמית', 'elementor_scratch_card'),
@@ -359,7 +394,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         z-index:1;
         display: none;
     ">';
-        echo '<img class="elementor-scratch-card-confetti" style="height: 100%;" src="'.esc_html( plugin_dir_url(__FILE__).'/images/confetti.gif' ).'" />';
+        echo '<img class="elementor-scratch-card-confetti" style="height: 100%; width: 100%;" src="'.esc_html( plugin_dir_url(__FILE__).'/images/'.esc_html( $settings['confetti_style'] ).'.gif' ).'" />';
         echo '</div>';
         echo '</div>';
         // echo '</div>';
