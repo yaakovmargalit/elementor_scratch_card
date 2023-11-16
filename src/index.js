@@ -41,24 +41,36 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
     const pluginUrl = this.getElementSettings('plugin_url')
     const scratchWidth = this.getElementSettings('scratch_width')
     const callbackCode = this.getElementSettings('callback_code')
+    const showConfetti = this.getElementSettings('show_confetti')
     var myCodeFunction = new Function(callbackCode);
 
     const scContainer = document.querySelector('.elementor-scratch-card');
     const sc = new ScratchCard(scContainer, {
       scratchType: scratchStyle,
       containerWidth: scContainer.offsetWidth,
-      containerHeight:containerHeight.size,
-      imageForwardSrc: frontImage.url ,
+      containerHeight: containerHeight.size,
+      imageForwardSrc: frontImage.url,
       imageBackgroundSrc: backImage.url,
-      htmlBackground: backHTML,
-      brushSrc: pluginUrl+'/images/brush.png',
-      clearZoneRadius: scratchStyle===0?0:scratchWidth.size,
-      width:5,
+      htmlBackground: backHTML || '',
+      brushSrc: pluginUrl + '/images/brush.png',
+      clearZoneRadius: scratchStyle === 0 ? 0 : scratchWidth.size,
+      width: 5,
       nPoints: 30,
       pointSize: 3,
       percentToFinish: percentage,
-      callback: myCodeFunction
+      callback: callbackFunction
     })
+
+    function callbackFunction() {
+      console.log(showConfetti);
+      if (showConfetti==="yes") {
+        jQuery('#elementor-scratch-card-confetti-box').fadeIn()
+        setTimeout(() => {
+          jQuery('#elementor-scratch-card-confetti-box').fadeOut()
+        }, 1500)
+      }
+      myCodeFunction()
+    }
 
     // Init
     sc.init().then(() => {

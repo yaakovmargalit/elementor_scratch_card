@@ -80,6 +80,19 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+			'show_confetti',
+			[
+				'label' => esc_html__( 'הצג קונפטי בסיום', 'elementor_scratch_card' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'כן', 'elementor_scratch_card' ),
+				'label_off' => esc_html__( 'לא', 'elementor_scratch_card' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+                'frontend_available' => true,
+			]
+		);
+
+        $this->add_control(
             'front_image',
             [
                 'label' => esc_html__('תמונה קדמית', 'elementor_scratch_card'),
@@ -170,6 +183,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
 			[
 				'label' => esc_html__( 'עובי מברשת', 'elementor_scratch_card' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
+                'default' => 30,
 				'range' =>  [
 						'min' => 1,
 						'max' => 100,
@@ -335,7 +349,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         z-index:1;
         display: none;
     ">';
-        echo '<img class="elementor-scratch-card-confetti" src="'.esc_html( plugin_dir_url(__FILE__).'/images/confetti.gif' ).'" />';
+        echo '<img class="elementor-scratch-card-confetti" style="height: 100%;" src="'.esc_html( plugin_dir_url(__FILE__).'/images/confetti.gif' ).'" />';
         echo '</div>';
         echo '</div>';
         // echo '</div>';
