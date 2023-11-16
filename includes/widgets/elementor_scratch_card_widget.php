@@ -69,7 +69,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'percentage',
             [
-                'label' => esc_html__('מספר אחוזים לסיום הגרוד', 'elementor_scratch_card'),
+                'label' => esc_html__('מספר אחוזים לסיום הגירוד', 'elementor_scratch_card'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 5,
                 'max' => 100,
