@@ -74,7 +74,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 'min' => 5,
                 'max' => 100,
                 'step' => 1,
-                'default' => 100,
+                'default' => 70,
                 'frontend_available' => true,
             ]
         );
@@ -193,7 +193,7 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 ],
                 'frontend_available' => true,
                 'condition' => [
-                    'scratch_style' => ['1','2','3'],
+                    'scratch_style' => [1,2,3],
                 ],
 
 			]
@@ -223,11 +223,17 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'style_section',
             [
-                'label' => esc_html__('Style', 'elementor_scratch_card'),
+                'label' => esc_html__('מסגרת', 'elementor_scratch_card'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-
+        $this->add_group_control(
+            \Elementor\Group_Control_Border::get_type(),
+            [
+                'name' => 'border',
+                'selector' => '{{WRAPPER}} .sc__container',
+            ]
+        );
 
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
@@ -237,7 +243,42 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
             ]
         );
 
+        $this->add_control(
+            'border-radius',
+            [
+                'label' => esc_html__('עיגול פינות', 'elementor_scratch_card'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .sc__container' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'size_section',
+            [
+                'label' => esc_html__('מידות', 'elementor_scratch_card'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
         $this->add_control(
             'height',
             [
@@ -293,39 +334,8 @@ class Elementor_Scratch_Card_Widget extends \Elementor\Widget_Base
                 ],
             ]
         );
-        $this->add_control(
-            'border-radius',
-            [
-                'label' => esc_html__('עיגול פינות', 'elementor_scratch_card'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000
-                    ],
-                    '%' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 0,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .sc__container' => 'border-radius: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Border::get_type(),
-            [
-                'name' => 'border',
-                'selector' => '{{WRAPPER}} .sc__container',
-            ]
-        );
+     
+     
 
      
 

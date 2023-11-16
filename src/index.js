@@ -53,7 +53,7 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
       imageBackgroundSrc: backImage.url,
       htmlBackground: backHTML || '',
       brushSrc: pluginUrl + '/images/brush.png',
-      clearZoneRadius: scratchStyle === 0 ? 0 : scratchWidth.size,
+      clearZoneRadius: scratchStyle === 0 ? 0 : scratchWidth?.size||30,
       width: 5,
       nPoints: 30,
       pointSize: 3,
