@@ -151,13 +151,13 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
       nPoints: 30,
       pointSize: 3,
       percentToFinish: percentage,
-      callback: callbackFunction
+      callback: callbackFunction.bind(this)
     });
     function callbackFunction() {
       if (showConfetti === "yes") {
-        jQuery('.elementor-scratch-card-confetti-box').fadeIn();
+        this.elements.$scratchCard.find('.elementor-scratch-card-confetti-box').fadeIn();
         setTimeout(() => {
-          jQuery('.elementor-scratch-card-confetti-box').fadeOut();
+          this.elements.$scratchCard.find('.elementor-scratch-card-confetti-box').fadeOut();
         }, confettiDuration?.size * 1000);
       }
       myCodeFunction();
