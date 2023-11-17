@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array(), 'version' => 'a47b564625fe8fbac8c1');
+<?php return array('dependencies' => array(), 'version' => 'e1c6b39902e27fac6e75');

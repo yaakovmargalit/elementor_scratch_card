@@ -1,9 +1,8 @@
 <?php
 /**
- * Plugin Name: כרטיס גירוד לאלמנטור
- * Description: צור כרטיס גירוד באתר שלך
- * Text Domain: elementor_scratch_card
- * 
+ * Plugin Name: Scratch card for Elementor
+ * Description: Create a scratch card on your website
+ * Text Domain: elementor-scratch-card
  * Elementor tested up to: 3.16.0
  * Elementor Pro tested up to: 3.16.0
  */

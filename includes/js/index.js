@@ -137,7 +137,7 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
     const showConfetti = this.getElementSettings('show_confetti');
     const confettiDuration = this.getElementSettings('confetti_duration');
     var myCodeFunction = new Function(callbackCode);
-    const scContainer = document.querySelector('.elementor-scratch-card');
+    const scContainer = this.elements.$scratchCard[0];
     const sc = new scratchcard_js__WEBPACK_IMPORTED_MODULE_1__.ScratchCard(scContainer, {
       scratchType: scratchStyle,
       containerWidth: scContainer.offsetWidth,
@@ -155,9 +155,9 @@ class ElementorScratchCard extends elementorModules.frontend.handlers.Base {
     });
     function callbackFunction() {
       if (showConfetti === "yes") {
-        jQuery('#elementor-scratch-card-confetti-box').fadeIn();
+        jQuery('.elementor-scratch-card-confetti-box').fadeIn();
         setTimeout(() => {
-          jQuery('#elementor-scratch-card-confetti-box').fadeOut();
+          jQuery('.elementor-scratch-card-confetti-box').fadeOut();
         }, confettiDuration?.size * 1000);
       }
       myCodeFunction();
